@@ -1,8 +1,14 @@
+//var
+
 var file = document.getElementById('file');
 var canvas = document.getElementById('canvas');
 var uploadImgSrc;
-
-file.addEventListener('change', loadLocalImage, false);
+var WidthMax = 500;
+var elem = document.getElementById('ChangeValue');
+var target = document.getElementById('DefaultValue');
+var dlLink = document.createElement('a');
+var downloadtxt = document.getElementById('Download');
+var IMGflag=false;
 
 //function
 
@@ -13,7 +19,7 @@ function loadLocalImage(e) {
     alert('画像を選択してください');
     return;
   } else {
-
+    IMGflag=true;
     var reader = new FileReader();
     reader.onload = function () {
       uploadImgSrc = reader.result;
@@ -23,28 +29,37 @@ function loadLocalImage(e) {
   }
 }
 
+rangeValue = function (elem, target) {
+  return function(evt){
+    target.innerHTML = elem.value;
+    WidthMax = elem.value;
+    if(IMGflag){
+      canvasDraw();
+    }else{
+    }
+  }
+}
+
 function canvasDraw(imgSrc) {
   var img = new Image();
   img.src = uploadImgSrc;
 
-  var WidthMax = 500;
-  var HeightMax = (WidthMax/img.width)*img.height;
-
-  canvas.width = WidthMax;
-  canvas.height = HeightMax;
-  
-  var ctx = canvas.getContext('2d');
-
-  ctx.clearRect(0, 0, WidthMax, HeightMax);
-
   img.onload = function () {
-    ctx.drawImage(img, 0, 0, WidthMax, HeightMax);
+    var HeightMax = (WidthMax / img.width) * img.height;
+    canvas.width = WidthMax;
+    canvas.height = HeightMax;
+    var ctx = canvas.getContext('2d');
 
+    ctx.clearRect(0, 0, WidthMax, HeightMax);
+    ctx.drawImage(img, 0, 0, WidthMax, HeightMax);
     // ダウンロードリンクを生成して出力
-    var dlLink = document.createElement('a');
     dlLink.href = canvas.toDataURL();
     dlLink.download = 'sample.png';
     dlLink.innerText = 'ダウンロード';
     document.getElementById('result').appendChild(dlLink);
   }
 }
+
+// EventListener
+file.addEventListener('change', loadLocalImage, false);
+elem.addEventListener('input', rangeValue(elem, target));

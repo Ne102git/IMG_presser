@@ -1,12 +1,6 @@
 var file = document.getElementById('file');
 var canvas = document.getElementById('canvas');
-var canvasWidth = 500;
-var canvasHeight = 500;
 var uploadImgSrc;
-
-canvas.width = canvasWidth;
-canvas.height = canvasHeight;
-var ctx = canvas.getContext('2d');
 
 file.addEventListener('change', loadLocalImage, false);
 
@@ -30,17 +24,25 @@ function loadLocalImage(e) {
 }
 
 function canvasDraw(imgSrc) {
-  ctx.clearRect(0, 0, canvasWidth, canvasHeight);
   var img = new Image();
   img.src = uploadImgSrc;
-  img.onload = function () {
-    ctx.drawImage(img, 0, 0, canvasWidth, this.height * (canvasWidth / this.width));
-    var data = canvas.toDataURL();
 
-      
+  var WidthMax = 500;
+  var HeightMax = (WidthMax/img.width)*img.height;
+
+  canvas.width = WidthMax;
+  canvas.height = HeightMax;
+  
+  var ctx = canvas.getContext('2d');
+
+  ctx.clearRect(0, 0, WidthMax, HeightMax);
+
+  img.onload = function () {
+    ctx.drawImage(img, 0, 0, WidthMax, HeightMax);
+
     // ダウンロードリンクを生成して出力
     var dlLink = document.createElement('a');
-    dlLink.href = data;
+    dlLink.href = canvas.toDataURL();
     dlLink.download = 'sample.png';
     dlLink.innerText = 'ダウンロード';
     document.getElementById('result').appendChild(dlLink);

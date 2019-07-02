@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>IMG_presser</title>
+</head>
+
+<body>
+  <header>
+    <h1>IMG_presser</h1>
+  </header>
+
+  <section>
+    <article>
+      <div class="upload">
+        <input type="file" name="file" id="file">
+      </div>
+      <canvas id="canvas"></canvas>
+      <div id="result"></div>
+      <script type="text/javascript" src="script/presser.js"></script>
+      <div>
+        <button onclick="saveCanvas('png');">pngで保存</button>
+        <button onclick="saveCanvas('jpeg');">jpegで保存</button>
+      </div>
+    </article>
+  </section>
+  <footer>
+    <address>Copyright(C)Amefura.com,Allright Reserved.</address>
+  </footer>
+</body>
+
+</html>

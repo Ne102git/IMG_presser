@@ -7,7 +7,7 @@ var WidthMax = 500;
 var ImgFlag=false;
 var elem = document.getElementById('ChangeValue');
 var target = document.getElementById('DefaultValue');
-var downloadlink = document.createElement('a');
+var DownloadLink = document.createElement('a');
 
 //function
 
@@ -50,10 +50,10 @@ function DrawCanvas(imgSrc) {
 
     ctx.clearRect(0, 0, WidthMax, HeightMax);
     ctx.drawImage(img, 0, 0, WidthMax, HeightMax);
-    downloadlink.href = canvas.toDataURL();
-    downloadlink.download = 'result.png';
-    downloadlink.innerText = 'Download';
-    document.getElementById('result').appendChild(downloadlink);
+    DownloadLink.href = canvas.toDataURL();
+    DownloadLink.download = 'result.png';
+    DownloadLink.innerText = 'Download';
+    document.getElementById('result').appendChild(DownloadLink);
   }
 }
 

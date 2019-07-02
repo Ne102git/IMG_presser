@@ -10,20 +10,18 @@
   <header>
     <h1>IMG_presser</h1>
   </header>
+  <h2>画像を今すぐ加工できるよ‼</h2>
+  <div class="upload">
+    <input type="file" name="file" id="file">
+    <br>
+    サイズ調整（横幅）: <input type="range" id="ChangeValue" min="0" max="1000">
+    <span id="DefaultValue">500</span>
+  </div>
+  <canvas id="canvas"></canvas>
+  <div id="result"></div>
+  <script type="text/javascript" src="script/presser.js"></script>
 
-  <section>
-    <article>
-      <div class="upload">
-        <input type="file" name="file" id="file">
-        <input type="range" id="ChangeValue" min="0" max="1000"><span id="DefaultValue">500</span>
-      </div>
-      <canvas id="canvas"></canvas>
-      <div id="result"></div>
-      <script type="text/javascript" src="script/presser.js"></script>
-    </article>
-  </section>
-  <footer>
-    <address>Copyright(C)Amefura.com,Allright Reserved.</address>
+  <address>Copyright(C)Amefura.com,Allright Reserved.</address>
   </footer>
 </body>
 

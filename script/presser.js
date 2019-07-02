@@ -2,47 +2,45 @@
 
 var file = document.getElementById('file');
 var canvas = document.getElementById('canvas');
-var uploadImgSrc;
+var Img;
 var WidthMax = 500;
+var ImgFlag=false;
 var elem = document.getElementById('ChangeValue');
 var target = document.getElementById('DefaultValue');
-var dlLink = document.createElement('a');
-var downloadtxt = document.getElementById('Download');
-var IMGflag=false;
+var downloadlink = document.createElement('a');
 
 //function
 
-function loadLocalImage(e) {
-  var fileData = e.target.files[0];
-
-  if (!fileData.type.match('image.*')) {
+function LoadImage(e) {
+  var ImgData = e.target.files[0];
+  if (!ImgData.type.match('image.*')) {
     alert('画像を選択してください');
     return;
   } else {
-    IMGflag=true;
-    var reader = new FileReader();
-    reader.onload = function () {
-      uploadImgSrc = reader.result;
-      canvasDraw();
+    ImgFlag=true;
+    var buffer = new FileReader();
+    buffer.onload = function () {
+      Img = buffer.result;
+      DrawCanvas();
     }
-    reader.readAsDataURL(fileData);
+    buffer.readAsDataURL(ImgData);
   }
 }
 
-rangeValue = function (elem, target) {
+function RangeValue(elem, target) {
   return function(evt){
     target.innerHTML = elem.value;
     WidthMax = elem.value;
-    if(IMGflag){
-      canvasDraw();
+    if(ImgFlag){
+      DrawCanvas();
     }else{
     }
   }
 }
 
-function canvasDraw(imgSrc) {
+function DrawCanvas(imgSrc) {
   var img = new Image();
-  img.src = uploadImgSrc;
+  img.src = Img;
 
   img.onload = function () {
     var HeightMax = (WidthMax / img.width) * img.height;
@@ -52,14 +50,13 @@ function canvasDraw(imgSrc) {
 
     ctx.clearRect(0, 0, WidthMax, HeightMax);
     ctx.drawImage(img, 0, 0, WidthMax, HeightMax);
-    // ダウンロードリンクを生成して出力
-    dlLink.href = canvas.toDataURL();
-    dlLink.download = 'sample.png';
-    dlLink.innerText = 'ダウンロード';
-    document.getElementById('result').appendChild(dlLink);
+    downloadlink.href = canvas.toDataURL();
+    downloadlink.download = 'result.png';
+    downloadlink.innerText = 'Download';
+    document.getElementById('result').appendChild(downloadlink);
   }
 }
 
 // EventListener
-file.addEventListener('change', loadLocalImage, false);
-elem.addEventListener('input', rangeValue(elem, target));
+file.addEventListener('change', LoadImage, false);
+elem.addEventListener('input', RangeValue(elem, target));

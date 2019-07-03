@@ -43,7 +43,7 @@ function DrawCanvas(imgSrc) {
   img.src = Img;
 
   img.onload = function () {
-    var HeightMax = (WidthMax / img.width) * img.height;
+    var HeightMax = (WidthMax / this.width) * this.height;
     canvas.width = WidthMax;
     canvas.height = HeightMax;
     var ctx = canvas.getContext('2d');
@@ -54,6 +54,7 @@ function DrawCanvas(imgSrc) {
     DownloadLink.download = 'result.png';
     DownloadLink.innerText = 'Download';
     document.getElementById('result').appendChild(DownloadLink);
+    
   }
 }
 

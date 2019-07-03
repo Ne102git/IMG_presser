@@ -3,6 +3,7 @@
 var file = document.getElementById('file');
 var canvas = document.getElementById('canvas');
 var Img;
+var ImgData;
 var WidthMax = 500;
 var ImgFlag=false;
 var elem = document.getElementById('ChangeValue');
@@ -12,7 +13,7 @@ var DownloadLink = document.createElement('a');
 //function
 
 function LoadImage(e) {
-  var ImgData = e.target.files[0];
+  ImgData = e.target.files[0];
   if (!ImgData.type.match('image.*')) {
     alert('画像を選択してください');
     return;
@@ -54,7 +55,7 @@ function DrawCanvas(imgSrc) {
     DownloadLink.download = 'result.png';
     DownloadLink.innerText = 'Download';
     document.getElementById('result').appendChild(DownloadLink);
-    //document.getElementById('filesizetxt').innerHTML = "画像サイズ" + img.size;
+    document.getElementById('filesizetxt').innerHTML = "アップロード時のファイルサイズ: " + ImgData.size;
   }
 }
 

@@ -54,6 +54,7 @@ function DrawCanvas(imgSrc) {
     DownloadLink.download = 'result.png';
     DownloadLink.innerText = 'Download';
     document.getElementById('result').appendChild(DownloadLink);
+    //document.getElementById('filesizetxt').innerHTML = "画像サイズ" + img.size;
   }
 }
 
